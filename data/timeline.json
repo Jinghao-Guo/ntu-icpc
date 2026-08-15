@@ -1,0 +1,27 @@
+{
+  "_note": "Placeholder entries have \"placeholder\": true and render with a badge. Set a real \"date\" (YYYY-MM-DD) and drop the flag once confirmed. Types: contest, team, deadline, other.",
+  "events": [
+    {
+      "date": "",
+      "title": "Individual Contest 1",
+      "type": "contest",
+      "detail": "First individual round, 6 problems. The actual date is not recorded yet — fill it in here and in data/contests.json.",
+      "url": "contest.html?id=individual-01",
+      "placeholder": true
+    },
+    {
+      "date": "",
+      "title": "Team formation",
+      "type": "team",
+      "detail": "Placeholder — set the date teams are finalised.",
+      "placeholder": true
+    },
+    {
+      "date": "",
+      "title": "Individual Contest 2",
+      "type": "contest",
+      "detail": "Placeholder — set the date of the next individual round.",
+      "placeholder": true
+    }
+  ]
+}

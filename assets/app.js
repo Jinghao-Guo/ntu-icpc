@@ -1,6 +1,26 @@
 /* ICPC site — shared data loading + page rendering.
    No build step: every page includes this file and sets <body data-page="...">. */
 
+/* ---------- navigation ----------
+   Rendered from here so six pages can't drift out of sync. */
+
+const NAV = [
+  ['index.html',       'Home',                'home'],
+  ['contestants.html', 'Contestants',         'contestants'],
+  ['individual.html',  'Individual Contests', 'individual'],
+  ['rules.html',       'Rules',               'rules'],
+  ['timeline.html',    'Timeline',            'timeline'],
+];
+
+function renderNav() {
+  const el = $('#nav');
+  if (!el) return;
+  // contest.html highlights "Individual Contests" via data-nav.
+  const active = document.body.dataset.nav || document.body.dataset.page;
+  el.innerHTML = NAV.map(([href, label, key]) =>
+    `<a href="${href}"${key === active ? ' class="active"' : ''}>${label}</a>`).join('');
+}
+
 /* ---------- tiny helpers ---------- */
 
 const esc = (s) =>
@@ -190,16 +210,6 @@ function placeAttr(n) { return n <= 3 ? ` data-place="${n}"` : ''; }
 async function pageHome() {
   const data = await loadAll();
   const { ranked } = overallRanking(data);
-  const problems = data.contests.reduce((n, c) => n + c.problems.length, 0);
-
-  $('#stats').innerHTML = [
-    [data.roster.length, 'Contestants'],
-    [data.contests.length, 'Contests'],
-    [problems, 'Problems'],
-    [ranked.length, 'Have competed'],
-  ].map(([n, label]) =>
-    `<div class="stat"><div class="num">${n}</div><div class="label">${label}</div></div>`
-  ).join('');
 
   const top = ranked.slice(0, 3);
   $('#podium').innerHTML = top.length
@@ -328,6 +338,79 @@ async function pageContest() {
     `submission on a solved problem. <code>·</code> means the problem was never attempted.`;
 }
 
+/* ---------- rules ---------- */
+
+async function pageRules() {
+  const data = await loadAll();
+  // Pulled from the data so the prose can't drift from what the site computes.
+  const p = data.perRejection;
+  document.querySelectorAll('.penalty-value').forEach((el) => { el.textContent = p; });
+  $('#penalty-example').textContent = `89 + ${p} = ${89 + p}`;
+  $('#contest-count').textContent = data.contests.length;
+}
+
+/* ---------- timeline ---------- */
+
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+function formatDate(iso) {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso || '');
+  if (!m) return null;
+  return `${+m[3]} ${MONTHS[+m[2] - 1]} ${m[1]}`;
+}
+
+function todayISO() {
+  const d = new Date();
+  const p = (n) => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
+}
+
+function eventCard(e, state) {
+  const when = formatDate(e.date);
+  return `<li class="event ${state}" data-type="${esc(e.type || 'other')}">
+    <div class="event-date">${when ? esc(when) : '<span class="muted">TBD</span>'}</div>
+    <div class="event-body">
+      <div class="event-head">
+        <span class="event-title">${esc(e.title)}</span>
+        <span class="badge badge-${esc(e.type || 'other')}">${esc(e.type || 'other')}</span>
+        ${e.placeholder ? '<span class="badge badge-placeholder">placeholder</span>' : ''}
+      </div>
+      ${e.detail ? `<p class="event-detail">${esc(e.detail)}</p>` : ''}
+      ${e.url ? `<a class="event-link" href="${esc(e.url)}">Details →</a>` : ''}
+    </div>
+  </li>`;
+}
+
+async function pageTimeline() {
+  const { events } = await loadJSON('data/timeline.json');
+  const today = todayISO();
+
+  const dated = events.filter((e) => formatDate(e.date));
+  const undated = events.filter((e) => !formatDate(e.date));
+
+  const upcoming = dated.filter((e) => e.date >= today).sort((a, b) => a.date.localeCompare(b.date));
+  const past = dated.filter((e) => e.date < today).sort((a, b) => b.date.localeCompare(a.date));
+
+  const section = (title, list, state) => list.length
+    ? `<h2>${title}</h2><ul class="timeline">${list.map((e) => eventCard(e, state)).join('')}</ul>`
+    : '';
+
+  const html =
+    section('Upcoming', upcoming, 'upcoming') +
+    section('To be scheduled', undated, 'undated') +
+    section('Past', past, 'past');
+
+  $('#timeline-body').innerHTML = html ||
+    '<div class="empty">No dates yet. Add them to <code>data/timeline.json</code>.</div>';
+
+  const n = events.filter((e) => e.placeholder).length;
+  $('#timeline-note').innerHTML = n
+    ? `${n} of these are placeholders with no real date set yet — edit ` +
+      `<code>data/timeline.json</code> to fill them in.`
+    : '';
+}
+
 /* ---------- boot ---------- */
 
 const PAGES = {
@@ -335,9 +418,12 @@ const PAGES = {
   contestants: pageContestants,
   individual: pageIndividual,
   contest: pageContest,
+  rules: pageRules,
+  timeline: pageTimeline,
 };
 
 document.addEventListener('DOMContentLoaded', () => {
+  renderNav();
   const run = PAGES[document.body.dataset.page];
   if (run) run().catch((err) => fail($('#main-content') || document.body, err));
 });

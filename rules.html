@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rules · NTU ICPC</title>
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/app.js" defer></script>
+</head>
+<body data-page="rules">
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">NTU&nbsp;ICPC</a>
+    <nav class="nav" id="nav"></nav>
+  </div>
+</header>
+
+<main id="main-content">
+  <div class="wrap">
+   <div class="prose">
+
+    <h1>Rules</h1>
+    <p class="lede">
+      How scores and rankings on this site are calculated.
+    </p>
+
+    <h2>Individual contest ranking</h2>
+
+    <h3>Within a single contest</h3>
+    <p>
+      Each contest is scored the standard ICPC way, exactly as Codeforces
+      reports it. Contestants are ordered by <strong>problems solved</strong>,
+      most first. Ties are broken by <strong>penalty</strong>, lowest first.
+    </p>
+    <p>
+      A solved problem contributes its solve time in minutes, plus
+      <strong><span class="penalty-value">20</span> minutes for every rejected
+      submission on that problem</strong>. Rejected submissions on problems you
+      never solve cost nothing. So solving a problem at 01:29 after one wrong
+      answer contributes <span id="penalty-example">89 + 20 = 109</span>.
+    </p>
+
+    <h3>Across all contests</h3>
+    <p>
+      The overall ranking on the
+      <a href="individual.html">Individual Contests</a> page is
+      <strong>average placement</strong>: add up your finishing positions and
+      divide by the number of contests you entered. Lower is better. Currently
+      <span id="contest-count">1</span> contest counts toward it.
+    </p>
+    <p>
+      <strong>Only contests you actually entered count.</strong> Missing a round
+      does not add a bad score to your average — it simply is not counted.
+    </p>
+
+    <h3>Tie-breaks</h3>
+    <p>When two people have the same average placement, in order:</p>
+    <ol>
+      <li><strong>More contests played</strong> wins. An average over three
+          rounds is better evidence than the same average over one.</li>
+      <li><strong>Better single finish</strong> wins.</li>
+      <li>Name, alphabetically. This is arbitrary and only exists so the order
+          is stable.</li>
+    </ol>
+
+    <h3>People who have not competed yet</h3>
+    <p>
+      Roster members who have not appeared in any scoreboard are listed
+      separately under <em>Yet to compete</em>, not ranked at the bottom.
+      Someone who has not competed has no measured performance, and giving them
+      a placeholder score would misrepresent them.
+    </p>
+
+    <h2>Why average placement</h2>
+    <p>
+      Placement is comparable across contests in a way that raw scores are not:
+      solving 3 of 6 hard problems and 5 of 6 easy ones can be the same
+      achievement, but the totals look nothing alike. Averaging positions
+      normalises for how hard a given problemset happened to be.
+    </p>
+    <p>
+      The trade-off is that it rewards consistency over peaks, and an average
+      over a single contest is not yet meaningful. That is why contests played
+      is shown next to every average.
+    </p>
+
+   </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">NTU ICPC training group · standings archive</div>
+</footer>
+
+</body>
+</html>

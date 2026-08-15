@@ -32,16 +32,45 @@ index.html                        home
 contestants.html                  roster
 individual.html                   overall ranking + contest list
 contest.html?id=<id>              one contest's scoreboard
-assets/style.css                  dark theme
-assets/app.js                     loading, ranking, rendering
-data/contestants.json             roster
+rules.html                        scoring and ranking rules
+timeline.html                     key dates
+assets/style.css                  theme
+assets/app.js                     nav, loading, ranking, rendering
+data/contestants.json             roster (public: no emails)
 data/contests.json                contest registry
 data/contests/<id>.json           one contest's standings
+data/timeline.json                dated events
+tools/refresh-ratings.py          pull Codeforces ratings
 ```
 
 Contest pages are driven by a **query parameter, not a file per contest**. This
 is the central decision: adding a contest must never mean copying HTML. A new
 round is one JSON file plus one registry line.
+
+The nav is rendered from a single array in `app.js` rather than hand-written per
+page. At six pages, six copies of a nav block is a guaranteed source of drift.
+
+### Rules and timeline pages (added after v1)
+
+**Rules** is prose, not data — a schema for prose would be over-engineering. The
+two values that could drift from the code (the penalty constant and the contest
+count) are injected from the data at render time, so the page cannot contradict
+what the site computes.
+
+Scope is deliberately narrow: individual contest ranking only. Team rules and
+selection criteria were considered and left out until they exist. A brief
+penalty explanation is folded into the ranking section because "placement" is
+meaningless without it.
+
+**Timeline** is data-driven (`data/timeline.json`), being a list of dated
+records. Events split into Upcoming / To be scheduled / Past, today counting as
+upcoming. Entries carry an explicit `placeholder` flag rendering a visible
+badge — seeded content must never read as real scheduling. Dates compare as ISO
+strings against a locally-computed today, avoiding timezone drift from `Date`
+parsing; empty or malformed dates degrade to "To be scheduled" rather than
+throwing.
+
+The home page's stat tiles were removed at the user's request.
 
 ### Module boundaries
 

@@ -34,13 +34,37 @@ All paths are relative, so the site works at any subpath without configuration.
 
 | File | Purpose |
 |---|---|
-| `index.html` | Landing page: stats, current top 3, latest contest |
+| `index.html` | Landing page: current top 3, latest contest, links to everything |
 | `contestants.html` | Full roster with handles and best finish |
 | `individual.html` | Overall ranking + list of individual contests |
 | `contest.html?id=<id>` | One contest's scoreboard and its Codeforces link |
+| `rules.html` | How scoring and ranking work |
+| `timeline.html` | Key dates |
 
 Contest pages are driven by a query parameter, so adding a contest never
-requires a new HTML file.
+requires a new HTML file. The nav is rendered from the `NAV` array in
+`assets/app.js` so six pages can't drift apart; each page declares itself with
+`<body data-page="...">`.
+
+## Adding a timeline entry
+
+Edit `data/timeline.json`:
+
+```json
+{
+  "date": "2026-09-14",
+  "title": "Individual Contest 2",
+  "type": "contest",
+  "detail": "Second individual round.",
+  "url": "contest.html?id=individual-02"
+}
+```
+
+`type` is one of `contest`, `team`, `deadline`, `other` and picks the badge
+colour. Entries are split into Upcoming / To be scheduled / Past automatically;
+today counts as upcoming. An entry with `"placeholder": true` renders with a
+visible placeholder badge — drop the flag once the date is real. An empty or
+malformed `date` lands under "To be scheduled" rather than breaking the page.
 
 ## Adding a contest
 
