@@ -237,6 +237,92 @@ a.handle:hover { text-decoration: underline; }
   background: #fdf7e8;
 }
 
+/* ---------- profile ---------- */
+
+/* Separate bordered cards rather than gap-over-a-tinted-background: with an
+   arbitrary number of facts, the background trick paints the empty tail of the
+   last grid row as a solid block. */
+.facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 10px;
+  margin: 0;
+}
+.fact {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: 13px 16px;
+}
+.fact dt {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--muted);
+}
+.fact dd { margin: 4px 0 0; font-size: 15px; }
+
+.name-link { color: inherit; }
+.name-link:hover { color: var(--accent); text-decoration: underline; }
+
+.warning {
+  border: 1px solid #f0d9a8;
+  background: #fdf7e8;
+  color: #7a4a10;
+  border-radius: 8px;
+  padding: 12px 15px;
+  font-size: 14px;
+  margin: 0 0 16px;
+}
+
+/* ---------- radar chart ----------
+   Single series: the heading names it, so no legend. The table alongside is
+   the accessible twin — every value is readable without colour or hover. */
+
+.radar-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 24px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  padding: 16px;
+}
+
+.radar { width: 430px; max-width: 100%; height: auto; flex: 1 1 340px; }
+
+.radar-ring,
+.radar-spoke {
+  fill: none;
+  stroke: var(--border);
+  stroke-width: 1;           /* hairline, solid — dashes read as "threshold" */
+}
+.radar-ring { stroke: #e8edf4; }
+
+.radar-area {
+  fill: var(--accent);
+  fill-opacity: .14;
+  stroke: var(--accent);
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+.radar-dot {
+  fill: var(--accent);
+  stroke: var(--surface);    /* 2px surface ring, per mark spec */
+  stroke-width: 2;
+}
+.radar-label {
+  font: 500 11px var(--mono);
+  fill: var(--muted);
+}
+
+.radar-table { width: auto; flex: 0 1 240px; font-size: 14px; }
+.radar-table td { padding: 5px 10px; white-space: nowrap; }
+.radar-table td:first-child { color: var(--muted); }
+.radar-table tr { border-top: 1px solid var(--border); }
+.radar-table tr:first-child { border-top: none; }
+
 /* ---------- misc ---------- */
 
 .pill {

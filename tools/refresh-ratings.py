@@ -29,10 +29,15 @@ def fetch(handles):
 
 
 def main():
-    if not PRIVATE.exists():
-        sys.exit(f"missing {PRIVATE}\nIt is gitignored — restore it from your backup.")
+    # The public roster now carries every field the private one does, so it is a
+    # complete fallback if the gitignored working copy goes missing.
+    source = PRIVATE if PRIVATE.exists() else PUBLIC
+    if not source.exists():
+        sys.exit(f"no roster found at {PRIVATE} or {PUBLIC}")
+    if source is PUBLIC:
+        print(f"{PRIVATE.name} missing — rebuilding it from the committed roster")
 
-    roster = json.loads(PRIVATE.read_text())
+    roster = json.loads(source.read_text())
     handles = [p["handle"] for p in roster]
 
     # One request covers every handle. Codeforces rejects the whole batch if any
@@ -74,20 +79,26 @@ def main():
         p["handle"] = u["handle"]          # adopt Codeforces' exact spelling
         p["rating"] = u.get("rating")      # None when unrated
         p["rank"] = u.get("rank")
+        p["maxRating"] = u.get("maxRating")
+        p["maxRank"] = u.get("maxRank")
+        p["country"] = u.get("country")
+        p["organization"] = u.get("organization") or None
 
     PRIVATE.write_text(json.dumps(roster, indent=2, ensure_ascii=False) + "\n")
 
-    public = [{k: p.get(k) for k in ("name", "handle", "rating", "rank")}
-              for p in roster]
+    # Emails ARE published on this site by explicit decision — see README.
+    # To stop publishing them, drop "email" from PUBLIC_FIELDS and re-run.
+    PUBLIC_FIELDS = ("name", "handle", "email", "rating", "rank",
+                     "maxRating", "maxRank", "country", "organization")
+    public = [{k: p.get(k) for k in PUBLIC_FIELDS} for p in roster]
     PUBLIC.write_text(json.dumps(public, indent=2, ensure_ascii=False) + "\n")
-
-    leaked = [p for p in public if "email" in p]
-    assert not leaked, "email leaked into the public roster"
 
     rated = sum(1 for p in roster if p.get("rating"))
     print(f"updated {hits}/{len(roster)} handles — {rated} rated, {len(roster) - rated} unrated")
-    print(f"wrote {PUBLIC.relative_to(ROOT)} (no emails) and "
-          f"{PRIVATE.relative_to(ROOT)} (local only)")
+    print(f"wrote {PUBLIC.relative_to(ROOT)} and {PRIVATE.relative_to(ROOT)}")
+    if "email" in PUBLIC_FIELDS:
+        print("NOTE: emails are included in the public roster and will be "
+              "published on the live site.")
 
 
 if __name__ == "__main__":

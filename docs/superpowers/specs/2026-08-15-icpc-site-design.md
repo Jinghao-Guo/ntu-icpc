@@ -72,6 +72,45 @@ throwing.
 
 The home page's stat tiles were removed at the user's request.
 
+### Profile pages and ability radar (added after v1)
+
+`profile.html?handle=<h>` — same query-param pattern as contests, so 33 people
+do not become 33 HTML files. Names link to profiles everywhere they appear;
+handles continue to link to Codeforces.
+
+**Emails are now published.** The earlier design deliberately kept them off the
+public site; the user was shown that this reverses that decision, that the repo
+is public, and that git history makes it permanent, and chose to publish. The
+mechanism is a single `PUBLIC_FIELDS` tuple in `tools/refresh-ratings.py`, so
+reversing it going forward is one line — though that cannot unpublish what is
+already in history or scraped.
+
+Because the public roster now carries every field, `contestants.private.json` is
+redundant and the refresh script rebuilds it from the committed roster if
+missing. That removes the "only copy, gitignored, unbacked" failure mode the
+previous design had.
+
+**Radar chart.** Hand-drawn SVG, no charting dependency — consistent with the
+no-build-step constraint. Design decisions, per the dataviz method:
+
+- Single series, so no legend; the heading names it.
+- The site's existing accent is the series colour, validated against the card
+  surface (lightness band, chroma floor, contrast all pass).
+- Grid rings and spokes are solid hairlines. Dashes read as "threshold".
+- 2px stroke, 8px vertices with a 2px surface ring.
+- Every value is also rendered as a table beside the chart, so no value is
+  reachable only through colour or hover.
+- The viewBox is sized so the outermost axis labels cannot clip; this is
+  asserted in the test by comparing each label's `getBBox` to the viewBox.
+- Axis labels are abbreviated on the chart and spelled out in the table, which
+  keeps the polygon large without risking overflow.
+
+**The scores are placeholders.** They are random, and they describe real, named
+people — so they are flagged at three levels: a `placeholder` boolean in the
+data, a `_warning` string in the file, and a visible notice on every profile
+that renders while the flag is true. Values are seeded from the handle so they
+are stable across loads; a chart that reshuffles on reload reads as broken.
+
 ### Module boundaries
 
 `app.js` separates into four layers that can each be reasoned about alone:

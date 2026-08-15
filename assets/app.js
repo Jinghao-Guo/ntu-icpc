@@ -205,6 +205,14 @@ function verdictCell(raw) {
 
 function placeAttr(n) { return n <= 3 ? ` data-place="${n}"` : ''; }
 
+/* A person's name always links to their profile. Falls back to plain text when
+   the handle isn't on the roster (e.g. a scoreboard entry we can't resolve). */
+function nameLink(data, handle) {
+  const name = nameFor(data, handle);
+  if (!name) return '<span class="muted">—</span>';
+  return `<a class="name-link" href="profile.html?handle=${encodeURIComponent(handle)}">${esc(name)}</a>`;
+}
+
 /* ---------- pages ---------- */
 
 async function pageHome() {
@@ -244,7 +252,7 @@ async function pageContestants() {
       const r = placeOf.get(p.handle.toLowerCase());
       return `<tr>
         <td class="rank-col">${i + 1}</td>
-        <td class="name-cell">${esc(p.name)}</td>
+        <td class="name-cell">${nameLink(data, p.handle)}</td>
         <td>${handleLink(data, p.handle)}</td>
         <td class="num-col">${r ? r.played : '<span class="muted">0</span>'}</td>
         <td class="num-col">${r ? '#' + r.best : '<span class="muted">—</span>'}</td>
@@ -262,7 +270,7 @@ async function pageIndividual() {
   $('#overall').innerHTML = ranked.map((r) => `
     <tr${placeAttr(r.place)}>
       <td class="rank-col">${r.place}</td>
-      <td class="name-cell">${esc(r.name)}</td>
+      <td class="name-cell">${nameLink(data, r.handle)}</td>
       <td>${handleLink(data, r.handle)}</td>
       <td class="num-col">${r.avg.toFixed(2)}</td>
       <td class="num-col">${r.played}</td>
@@ -322,10 +330,9 @@ async function pageContest() {
     contest.problems.map((p) => `<th class="verdict">${esc(p)}</th>`).join('');
 
   $('#contest-standings').innerHTML = contest.standings.map((row) => {
-    const name = nameFor(data, row.handle);
     return `<tr${placeAttr(row.rank)}>
       <td class="rank-col">${row.rank}</td>
-      <td class="name-cell">${name ? esc(name) : '<span class="muted">—</span>'}</td>
+      <td class="name-cell">${nameLink(data, row.handle)}</td>
       <td>${handleLink(data, row.handle)}</td>
       <td class="num-col">${row.solved}</td>
       <td class="num-col">${row.penalty}</td>
@@ -336,6 +343,150 @@ async function pageContest() {
   $('#contest-note').innerHTML =
     `Penalty is solve time in minutes plus ${data.perRejection} minutes per rejected ` +
     `submission on a solved problem. <code>·</code> means the problem was never attempted.`;
+}
+
+/* ---------- radar chart ----------
+   Single series, so no legend: the heading names it. Grid is solid hairlines
+   (dashes read as "threshold"). Values also render as a table beside the chart
+   so nothing is reachable only by colour or hover. The viewBox is sized to fit
+   the outermost axis labels — a radar that clips its own labels is the classic
+   failure here. */
+
+const RADAR = { w: 430, h: 300, r: 100, labelGap: 24 };
+
+function radarSVG(axes, values, max) {
+  const { w, h, r, labelGap } = RADAR;
+  const cx = w / 2, cy = h / 2;
+  const n = axes.length;
+  const ang = (i) => (Math.PI * 2 * i) / n - Math.PI / 2;
+  const at = (i, radius) => [cx + Math.cos(ang(i)) * radius, cy + Math.sin(ang(i)) * radius];
+  const poly = (radius) =>
+    Array.from({ length: n }, (_, i) => at(i, radius).map((v) => v.toFixed(1)).join(',')).join(' ');
+
+  const rings = [0.25, 0.5, 0.75, 1]
+    .map((f) => `<polygon class="radar-ring" points="${poly(r * f)}"/>`).join('');
+
+  const spokes = Array.from({ length: n }, (_, i) => {
+    const [x, y] = at(i, r);
+    return `<line class="radar-spoke" x1="${cx}" y1="${cy}" x2="${x.toFixed(1)}" y2="${y.toFixed(1)}"/>`;
+  }).join('');
+
+  const shape = Array.from({ length: n }, (_, i) =>
+    at(i, r * (values[i] / max)).map((v) => v.toFixed(1)).join(',')).join(' ');
+
+  const dots = Array.from({ length: n }, (_, i) => {
+    const [x, y] = at(i, r * (values[i] / max));
+    return `<circle class="radar-dot" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="4">` +
+      `<title>${esc(axes[i].name)}: ${values[i]} / ${max}</title></circle>`;
+  }).join('');
+
+  const labels = Array.from({ length: n }, (_, i) => {
+    const [x, y] = at(i, r + labelGap);
+    const dx = Math.cos(ang(i));
+    const anchor = Math.abs(dx) < 0.3 ? 'middle' : (dx > 0 ? 'start' : 'end');
+    // Nudge top/bottom labels off the vertex so they don't sit on the spoke.
+    const dy = Math.sin(ang(i));
+    const yAdj = Math.abs(dy) < 0.3 ? 4 : (dy > 0 ? 12 : -4);
+    return `<text class="radar-label" x="${x.toFixed(1)}" y="${(y + yAdj).toFixed(1)}"` +
+      ` text-anchor="${anchor}">${esc(axes[i].short)}</text>`;
+  }).join('');
+
+  return `<svg class="radar" viewBox="0 0 ${w} ${h}" role="img"
+    aria-label="Ability by topic, ${axes.map((a, i) => `${a.name} ${values[i]} of ${max}`).join(', ')}">
+    ${rings}${spokes}
+    <polygon class="radar-area" points="${shape}"/>
+    ${dots}${labels}
+  </svg>`;
+}
+
+function radarTable(axes, values, max) {
+  return `<table class="radar-table"><tbody>${
+    axes.map((a, i) => `<tr>
+      <td>${esc(a.name)}</td>
+      <td class="num-col">${values[i]}<span class="muted"> / ${max}</span></td>
+    </tr>`).join('')}</tbody></table>`;
+}
+
+/* ---------- profile ---------- */
+
+async function pageProfile() {
+  const data = await loadAll();
+  const handle = new URLSearchParams(location.search).get('handle') || '';
+  const person = data.byHandle.get(handle.toLowerCase());
+
+  if (!person) {
+    $('#profile-body').innerHTML =
+      `<div class="empty">No contestant with handle <code>${esc(handle)}</code>.<br>` +
+      `<a href="contestants.html">Back to contestants</a></div>`;
+    return;
+  }
+
+  document.title = `${person.name} · NTU ICPC`;
+  $('#profile-name').textContent = person.name;
+  $('#profile-handle').innerHTML = handleLink(data, person.handle);
+
+  // --- Codeforces + contact facts
+  // Rating and rank always show (their absence is meaningful: "unrated").
+  // Optional facts are omitted entirely rather than rendered as an empty dash.
+  const facts = [
+    ['Rating', person.rating ?? '—'],
+    ['Rank', person.rank ?? 'unrated'],
+    ['Max rating', person.maxRating],
+    ['Max rank', person.maxRank],
+    ['Country', person.country],
+    ['Organization', person.organization],
+  ].filter(([, v], i) => i < 2 || (v !== null && v !== undefined && v !== ''));
+
+  $('#profile-facts').innerHTML = facts.map(([k, v]) =>
+    `<div class="fact"><dt>${esc(k)}</dt><dd>${esc(String(v))}</dd></div>`).join('');
+
+  const contact = $('#profile-contact');
+  contact.innerHTML = person.email
+    ? `<div class="fact"><dt>Email</dt><dd><a href="mailto:${esc(person.email)}">${esc(person.email)}</a></dd></div>`
+    : '';
+  // Hide the whole section, heading included, when there's nothing in it.
+  $('#contact-heading').hidden = !person.email;
+  contact.hidden = !person.email;
+
+  // --- contest history
+  const history = [];
+  for (const c of data.contests) {
+    const row = c.standings.find((r) => r.handle.toLowerCase() === handle.toLowerCase());
+    if (row) history.push({ c, row });
+  }
+
+  $('#profile-history').innerHTML = history.length
+    ? `<div class="table-scroll"><table>
+         <thead><tr><th>Contest</th><th class="num-col">Rank</th>
+           <th class="num-col">Solved</th><th class="num-col">Penalty</th></tr></thead>
+         <tbody>${history.map(({ c, row }) => `<tr${placeAttr(row.rank)}>
+           <td><a href="contest.html?id=${encodeURIComponent(c.id)}">${esc(c.title)}</a></td>
+           <td class="rank-col">${row.rank}</td>
+           <td class="num-col">${row.solved}</td>
+           <td class="num-col">${row.penalty}</td></tr>`).join('')}
+         </tbody></table></div>`
+    : '<div class="empty">Has not competed in a recorded contest yet.</div>';
+
+  // --- radar
+  const skills = await loadJSON('data/skills.json');
+  const values = skills.scores[person.handle];
+
+  if (!values) {
+    $('#profile-radar').innerHTML = '<div class="empty">No ability data.</div>';
+  } else {
+    $('#profile-radar').innerHTML =
+      `<div class="radar-wrap">
+         ${radarSVG(skills.axes, values, skills.max)}
+         ${radarTable(skills.axes, values, skills.max)}
+       </div>`;
+    if (skills.placeholder) {
+      $('#radar-warning').innerHTML =
+        `<strong>Placeholder data.</strong> These scores are randomly generated ` +
+        `and are not an assessment of this person. They exist so the chart has ` +
+        `something to draw until real values replace them.`;
+      $('#radar-warning').hidden = false;
+    }
+  }
 }
 
 /* ---------- rules ---------- */
@@ -420,6 +571,7 @@ const PAGES = {
   contest: pageContest,
   rules: pageRules,
   timeline: pageTimeline,
+  profile: pageProfile,
 };
 
 document.addEventListener('DOMContentLoaded', () => {

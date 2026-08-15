@@ -2,199 +2,364 @@
   {
     "name": "ALHASHIM AHMED SALEH T",
     "handle": "vahmad",
+    "email": "alha0001@e.ntu.edu.sg",
     "rating": 1942,
-    "rank": "candidate master"
+    "rank": "candidate master",
+    "maxRating": 1942,
+    "maxRank": "candidate master",
+    "country": "Saudi Arabia",
+    "organization": null
   },
   {
     "name": "BUI DANG NGUYEN",
     "handle": "ItsJerr",
+    "email": "C240035@e.ntu.edu.sg",
     "rating": 2066,
-    "rank": "candidate master"
+    "rank": "candidate master",
+    "maxRating": 2153,
+    "maxRank": "master",
+    "country": null,
+    "organization": null
   },
   {
     "name": "CHINBAT IRMUUN",
     "handle": "irmuun",
+    "email": "IRMUUN001@e.ntu.edu.sg",
     "rating": 2237,
-    "rank": "master"
+    "rank": "master",
+    "maxRating": 2510,
+    "maxRank": "grandmaster",
+    "country": "Mongolia",
+    "organization": "Nanyang Technological University"
   },
   {
     "name": "DAO THIEN PHONG",
     "handle": "J_ai_bt_dou",
+    "email": "phong004@e.ntu.edu.sg",
     "rating": 1947,
-    "rank": "candidate master"
+    "rank": "candidate master",
+    "maxRating": 1978,
+    "maxRank": "candidate master",
+    "country": "Vietnam",
+    "organization": "HNUE High School for Gifted Students"
   },
   {
     "name": "DE VERA HANS GABRIEL DACON",
     "handle": "ProtonDecay314",
+    "email": "hansgabr001@e.ntu.edu.sg",
     "rating": 1800,
-    "rank": "expert"
+    "rank": "expert",
+    "maxRating": 1990,
+    "maxRank": "candidate master",
+    "country": "Philippines",
+    "organization": "Nanyang Technological University"
   },
   {
     "name": "Duong Kien Khai",
     "handle": "YangJackie",
+    "email": "kienkhai001@e.ntu.edu.sg",
     "rating": 1744,
-    "rank": "expert"
+    "rank": "expert",
+    "maxRating": 1951,
+    "maxRank": "candidate master",
+    "country": null,
+    "organization": null
   },
   {
     "name": "ERDENEBAYAR TENUUN",
     "handle": "Tenkhu",
+    "email": "tenuun001@e.ntu.edu.sg",
     "rating": 1590,
-    "rank": "specialist"
+    "rank": "specialist",
+    "maxRating": 1811,
+    "maxRank": "expert",
+    "country": "Mongolia",
+    "organization": null
   },
   {
     "name": "KHURTSBILGUUN ONOLT",
     "handle": "Onolt_kh",
+    "email": "onolt001@e.ntu.edu.sg",
     "rating": 2396,
-    "rank": "international master"
+    "rank": "international master",
+    "maxRating": 2582,
+    "maxRank": "grandmaster",
+    "country": "Mongolia",
+    "organization": "Nanyang Technological University"
   },
   {
     "name": "KONGKIJPIPAT PEERANAT",
     "handle": "autoastt",
+    "email": "peeranat001@e.ntu.edu.sg",
     "rating": 1813,
-    "rank": "expert"
+    "rank": "expert",
+    "maxRating": 1885,
+    "maxRank": "expert",
+    "country": "Thailand",
+    "organization": "Nanyang Technological University"
   },
   {
     "name": "LI YITONG",
     "handle": "LightParticle",
+    "email": "LIYI0118@e.ntu.edu.sg",
     "rating": 1838,
-    "rank": "expert"
+    "rank": "expert",
+    "maxRating": 1867,
+    "maxRank": "expert",
+    "country": null,
+    "organization": null
   },
   {
     "name": "Lim Jia Qing",
     "handle": "nyavim",
+    "email": "jlim471@e.ntu.edu.sg",
     "rating": 1901,
-    "rank": "candidate master"
+    "rank": "candidate master",
+    "maxRating": 2002,
+    "maxRank": "candidate master",
+    "country": "Singapore",
+    "organization": "Nanyang Technological University"
   },
   {
     "name": "MEMARNISHVILI DAVID",
     "handle": "David-M",
+    "email": "david017@e.ntu.edu.sg",
     "rating": 2190,
-    "rank": "master"
+    "rank": "master",
+    "maxRating": 2378,
+    "maxRank": "international master",
+    "country": "Georgia",
+    "organization": "Nanyang Technological University"
   },
   {
     "name": "NAMSRAIJAV BATSUKH",
     "handle": "ChomuSuke",
+    "email": "BATSUKH001@e.ntu.edu.sg",
     "rating": 1685,
-    "rank": "expert"
+    "rank": "expert",
+    "maxRating": 1772,
+    "maxRank": "expert",
+    "country": null,
+    "organization": "Nanyang Technological University"
   },
   {
     "name": "NGO HUY DANG KHOA",
     "handle": "longjourney",
+    "email": "huydangk001@e.ntu.edu.sg",
     "rating": 1632,
-    "rank": "expert"
+    "rank": "expert",
+    "maxRating": 1823,
+    "maxRank": "expert",
+    "country": "Vietnam",
+    "organization": "Nanyang Technological University"
   },
   {
     "name": "NGUYEN TRUNG DUNG",
     "handle": "iCanSeeForever",
+    "email": "I240006@e.ntu.edu.sg",
     "rating": 1980,
-    "rank": "candidate master"
+    "rank": "candidate master",
+    "maxRating": 2071,
+    "maxRank": "candidate master",
+    "country": "Vietnam",
+    "organization": null
   },
   {
     "name": "ODONBAATAR TENGIS",
     "handle": "theulo",
+    "email": "tengis001@e.ntu.edu.sg",
     "rating": 1516,
-    "rank": "specialist"
+    "rank": "specialist",
+    "maxRating": 1516,
+    "maxRank": "specialist",
+    "country": null,
+    "organization": null
   },
   {
     "name": "RAHMAN JARIF",
     "handle": "Jarif_Rahman",
+    "email": "jarif001@e.ntu.edu.sg",
     "rating": 1804,
-    "rank": "expert"
+    "rank": "expert",
+    "maxRating": 2261,
+    "maxRank": "master",
+    "country": "Bangladesh",
+    "organization": "Mamnoon Siam Fan Club"
   },
   {
     "name": "Sethupathy Sakthivel",
     "handle": "sirsaksalot",
+    "email": "se0001el@e.ntu.edu.sg",
     "rating": 1452,
-    "rank": "specialist"
+    "rank": "specialist",
+    "maxRating": 1646,
+    "maxRank": "expert",
+    "country": "Singapore",
+    "organization": null
   },
   {
     "name": "Tran Son Viet",
     "handle": "VietCT",
+    "email": "viet010@e.ntu.edu.sg",
     "rating": 2128,
-    "rank": "master"
+    "rank": "master",
+    "maxRating": 2128,
+    "maxRank": "master",
+    "country": "Vietnam",
+    "organization": "Nanyang Technological University"
   },
   {
     "name": "Wang Guanyu",
     "handle": "cirnovlove",
+    "email": "wang2443@e.ntu.edu.sg",
     "rating": 2357,
-    "rank": "international master"
+    "rank": "international master",
+    "maxRating": 2361,
+    "maxRank": "international master",
+    "country": "China",
+    "organization": "Follow your heart"
   },
   {
     "name": "Yeo Swe Hon",
     "handle": "swehoneycodes",
+    "email": "syeo037@e.ntu.edu.sg",
     "rating": 2028,
-    "rank": "candidate master"
+    "rank": "candidate master",
+    "maxRating": 2053,
+    "maxRank": "candidate master",
+    "country": "Singapore",
+    "organization": "Nanyang Technological University"
   },
   {
     "name": "Yong Zi Hong",
     "handle": "zipongster",
+    "email": "yong0282@e.ntu.edu.sg",
     "rating": 1678,
-    "rank": "expert"
+    "rank": "expert",
+    "maxRating": 1799,
+    "maxRank": "expert",
+    "country": null,
+    "organization": null
   },
   {
     "name": "Zhu Zihan",
     "handle": "Jelefy",
+    "email": "zihan021@e.ntu.edu.sg",
     "rating": 2500,
-    "rank": "grandmaster"
+    "rank": "grandmaster",
+    "maxRating": 2500,
+    "maxRank": "grandmaster",
+    "country": "China",
+    "organization": "Nanyang Technological University"
   },
   {
     "name": "AIDARBEKOV ALIHAN MIRLANOVICH",
     "handle": "Alihan_8",
+    "email": "ALIHANMI001@e.ntu.edu.sg",
     "rating": 2234,
-    "rank": "master"
+    "rank": "master",
+    "maxRating": 2428,
+    "maxRank": "grandmaster",
+    "country": "Kyrgyzstan",
+    "organization": null
   },
   {
     "name": "ASKAR AKEZHAN",
     "handle": "WansurMyKing667",
+    "email": "AKEZHAN001@e.ntu.edu.sg",
     "rating": 2308,
-    "rank": "international master"
+    "rank": "international master",
+    "maxRating": 2308,
+    "maxRank": "international master",
+    "country": "Kazakhstan",
+    "organization": null
   },
   {
     "name": "CHENG LUFENG",
     "handle": "Evier.",
+    "email": "LCHENG014@e.ntu.edu.sg",
     "rating": 2145,
-    "rank": "master"
+    "rank": "master",
+    "maxRating": 2234,
+    "maxRank": "master",
+    "country": "China",
+    "organization": "Nanjing Foreign Language School"
   },
   {
     "name": "HENG HAU YE",
     "handle": "wurzang",
+    "email": "C260207@e.ntu.edu.sg",
     "rating": 1906,
-    "rank": "candidate master"
+    "rank": "candidate master",
+    "maxRating": 2244,
+    "maxRank": "master",
+    "country": null,
+    "organization": null
   },
   {
     "name": "NGUYEN BUI DUC DUNG",
     "handle": "RingedGenesis",
+    "email": "DUNG007@e.ntu.edu.sg",
     "rating": 2435,
-    "rank": "grandmaster"
+    "rank": "grandmaster",
+    "maxRating": 2435,
+    "maxRank": "grandmaster",
+    "country": "Vietnam",
+    "organization": null
   },
   {
     "name": "RAHMANI NODEHI RADIN",
     "handle": "RadRah",
+    "email": "RADIN001@e.ntu.edu.sg",
     "rating": 1909,
-    "rank": "candidate master"
+    "rank": "candidate master",
+    "maxRating": 2134,
+    "maxRank": "master",
+    "country": "Iran",
+    "organization": "Allame Helli"
   },
   {
     "name": "TRAN MINH HOANG",
     "handle": "tranhoang95",
+    "email": "TRAN0111@e.ntu.edu.sg",
     "rating": null,
-    "rank": null
+    "rank": null,
+    "maxRating": null,
+    "maxRank": null,
+    "country": null,
+    "organization": null
   },
   {
     "name": "TSOY MAXIM",
     "handle": "ahyeon",
+    "email": "TSOY0001@e.ntu.edu.sg",
     "rating": 2391,
-    "rank": "international master"
+    "rank": "international master",
+    "maxRating": 2452,
+    "maxRank": "grandmaster",
+    "country": "Kazakhstan",
+    "organization": null
   },
   {
     "name": "ZARE MANI",
     "handle": "eren__",
+    "email": "ZARE0002@e.ntu.edu.sg",
     "rating": 2517,
-    "rank": "grandmaster"
+    "rank": "grandmaster",
+    "maxRating": 2584,
+    "maxRank": "grandmaster",
+    "country": "Iran",
+    "organization": null
   },
   {
     "name": "ZHAO FUCHENG",
     "handle": "igotpror",
+    "email": "FZHAO007@e.ntu.edu.sg",
     "rating": null,
-    "rank": null
+    "rank": null,
+    "maxRating": null,
+    "maxRank": null,
+    "country": null,
+    "organization": null
   }
 ]

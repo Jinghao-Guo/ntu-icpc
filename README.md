@@ -38,8 +38,34 @@ All paths are relative, so the site works at any subpath without configuration.
 | `contestants.html` | Full roster with handles and best finish |
 | `individual.html` | Overall ranking + list of individual contests |
 | `contest.html?id=<id>` | One contest's scoreboard and its Codeforces link |
+| `profile.html?handle=<h>` | One person: Codeforces info, email, contest history, ability radar |
 | `rules.html` | How scoring and ranking work |
 | `timeline.html` | Key dates |
+
+Clicking anyone's **name** anywhere on the site opens their profile; clicking
+their **handle** goes to Codeforces.
+
+## Ability radar charts
+
+Each profile has a radar chart across 8 topics (Implementation, Math, Greedy,
+DP, Graphs, Data Structures, Strings, Geometry).
+
+**The scores are currently placeholders — randomly generated, not real
+assessments.** While `"placeholder": true` is set in `data/skills.json`, every
+profile shows a notice saying so. Values are seeded from each handle so they
+stay stable between page loads rather than reshuffling.
+
+To put in real data: edit the `scores` map in `data/skills.json` (arrays of 8
+numbers, 0 to `max`) and set `"placeholder": false`. The notice disappears
+automatically. To regenerate placeholders after roster changes:
+
+```sh
+python3 tools/gen-placeholder-skills.py
+```
+
+The chart is hand-drawn SVG — no charting dependency. It is a single series, so
+it carries no legend; every value is also printed in a table beside it, so
+nothing is readable only by colour or hover.
 
 Contest pages are driven by a query parameter, so adding a contest never
 requires a new HTML file. The nav is rendered from the `NAV` array in
@@ -115,19 +141,26 @@ configurable via `penaltyPerRejection` in `data/contests.json`.
 
 ## Privacy
 
-`data/` is served as static files on a public site, so anything committed there
-is fetchable at `https://<user>.github.io/<repo>/data/...` regardless of whether
-a page renders it.
+**Email addresses ARE published on this site.** They appear on each contestant's
+profile page and are in `data/contestants.json`, which is served publicly and
+permanently recorded in git history. This was an explicit decision.
 
-Email addresses are therefore **not** in the committed data. The split:
+To stop publishing them: drop `"email"` from `PUBLIC_FIELDS` in
+`tools/refresh-ratings.py`, re-run it, and commit. Note that removing them going
+forward does **not** erase them from git history or from anything that has
+already scraped the site — that would require rewriting history and a force
+push.
 
 | File | Contents | Committed |
 |---|---|---|
-| `data/contestants.json` | name + handle + rating + rank | yes |
-| `data/contestants.private.json` | + email | **no** (gitignored) |
+| `data/contestants.json` | name, handle, email, rating, rank, max rating/rank, country, org | yes |
+| `data/contestants.private.json` | identical | no (gitignored working copy) |
 
-The source roster screenshots are gitignored for the same reason — they show the
-email column.
+The private file is now fully redundant — the refresh script rebuilds it from
+the committed roster if it goes missing.
+
+The source roster screenshots stay gitignored simply because they are bulky
+scans, not because of their contents.
 
 If you ever need to regenerate the public file from the private one, or refresh
 Codeforces ratings:
