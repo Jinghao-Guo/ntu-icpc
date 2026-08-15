@@ -105,6 +105,32 @@ async function loadAll() {
 const nameFor = (data, handle) =>
   data.byHandle.get(handle.toLowerCase())?.name ?? null;
 
+/* ---------- Codeforces rating colours ----------
+   Thresholds per Codeforces. Legendary grandmasters (3000+) render fully red
+   rather than with the black first letter; nobody here is close, and it can be
+   special-cased if that changes. */
+
+function cfClass(rating) {
+  if (rating == null) return 'cf-unrated';
+  if (rating >= 2400) return 'cf-gm';
+  if (rating >= 2100) return 'cf-master';
+  if (rating >= 1900) return 'cf-cm';
+  if (rating >= 1600) return 'cf-expert';
+  if (rating >= 1400) return 'cf-specialist';
+  if (rating >= 1200) return 'cf-pupil';
+  return 'cf-newbie';
+}
+
+/* Single source of truth for how a handle is rendered anywhere on the site. */
+function handleLink(data, handle) {
+  const p = data.byHandle.get(handle.toLowerCase());
+  const rating = p?.rating ?? null;
+  const title = p?.rank ? `${p.rank} · ${rating}` : 'unrated';
+  return `<a class="handle cf ${cfClass(rating)}" title="${esc(title)}"` +
+    ` href="https://codeforces.com/profile/${encodeURIComponent(handle)}"` +
+    ` target="_blank" rel="noopener">${esc(handle)}</a>`;
+}
+
 /* ---------- overall ranking: average placement ---------- */
 
 function overallRanking(data) {
@@ -209,8 +235,7 @@ async function pageContestants() {
       return `<tr>
         <td class="rank-col">${i + 1}</td>
         <td class="name-cell">${esc(p.name)}</td>
-        <td><a class="handle" href="https://codeforces.com/profile/${encodeURIComponent(p.handle)}"
-               target="_blank" rel="noopener">${esc(p.handle)}</a></td>
+        <td>${handleLink(data, p.handle)}</td>
         <td class="num-col">${r ? r.played : '<span class="muted">0</span>'}</td>
         <td class="num-col">${r ? '#' + r.best : '<span class="muted">—</span>'}</td>
       </tr>`;
@@ -228,8 +253,7 @@ async function pageIndividual() {
     <tr${placeAttr(r.place)}>
       <td class="rank-col">${r.place}</td>
       <td class="name-cell">${esc(r.name)}</td>
-      <td><a class="handle" href="https://codeforces.com/profile/${encodeURIComponent(r.handle)}"
-             target="_blank" rel="noopener">${esc(r.handle)}</a></td>
+      <td>${handleLink(data, r.handle)}</td>
       <td class="num-col">${r.avg.toFixed(2)}</td>
       <td class="num-col">${r.played}</td>
       <td class="num-col">#${r.best}</td>
@@ -252,7 +276,8 @@ async function pageIndividual() {
        <p class="lede">${yetToCompete.length} roster members have not appeared in a
         contest yet, so they are not ranked above.</p>
        <div class="chips">${yetToCompete
-         .map((p) => `<span class="chip" title="${esc(p.name)}">${esc(p.handle)}</span>`)
+         .map((p) => `<span class="chip cf ${cfClass(p.rating ?? null)}"
+                            title="${esc(p.name)}">${esc(p.handle)}</span>`)
          .join('')}</div>`;
   }
 }
@@ -291,8 +316,7 @@ async function pageContest() {
     return `<tr${placeAttr(row.rank)}>
       <td class="rank-col">${row.rank}</td>
       <td class="name-cell">${name ? esc(name) : '<span class="muted">—</span>'}</td>
-      <td><a class="handle" href="https://codeforces.com/profile/${encodeURIComponent(row.handle)}"
-             target="_blank" rel="noopener">${esc(row.handle)}</a></td>
+      <td>${handleLink(data, row.handle)}</td>
       <td class="num-col">${row.solved}</td>
       <td class="num-col">${row.penalty}</td>
       ${row.cells.map(verdictCell).join('')}

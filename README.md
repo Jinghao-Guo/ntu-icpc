@@ -99,17 +99,50 @@ Email addresses are therefore **not** in the committed data. The split:
 
 | File | Contents | Committed |
 |---|---|---|
-| `data/contestants.json` | name + handle | yes |
-| `data/contestants.private.json` | name + handle + email | **no** (gitignored) |
+| `data/contestants.json` | name + handle + rating + rank | yes |
+| `data/contestants.private.json` | + email | **no** (gitignored) |
 
 The source roster screenshots are gitignored for the same reason — they show the
 email column.
 
-If you ever need to regenerate the public file from the private one:
+If you ever need to regenerate the public file from the private one, or refresh
+Codeforces ratings:
 
 ```sh
-python3 -c "import json;s=json.load(open('data/contestants.private.json'));json.dump([{'name':p['name'],'handle':p['handle']} for p in s],open('data/contestants.json','w'),indent=2,ensure_ascii=False)"
+python3 tools/refresh-ratings.py
 ```
+
+That reads `data/contestants.private.json`, updates every rating from the
+Codeforces API, and rewrites `data/contestants.json` without emails. Run it
+whenever you add a contest.
+
+It pairs the API response **by position, not by handle name** — Codeforces
+resolves renamed accounts, so asking for an old handle returns the new one.
+Matching on the string would silently drop anyone who has renamed. The script
+prints a line when it detects a rename.
+
+## Handle colours
+
+Handles are coloured by Codeforces rating, using Codeforces' own values:
+
+| Rating | Rank | Colour |
+|---|---|---|
+| 2400+ | grandmaster | red |
+| 2100–2399 | master / international master | orange |
+| 1900–2099 | candidate master | violet |
+| 1600–1899 | expert | blue |
+| 1400–1599 | specialist | cyan |
+| 1200–1399 | pupil | green |
+| < 1200 | newbie | gray |
+| — | unrated | default text |
+
+Ratings are baked into `data/contestants.json` rather than fetched in the
+browser, so pages render instantly and don't put every visitor's page load on
+Codeforces' API. The cost is that they go stale until you re-run the refresh
+script. Hovering a handle shows its rank and rating.
+
+Legendary grandmasters (3000+) render fully red rather than with Codeforces'
+black first letter — nobody is close, and it is a small special case to add.
 
 ## Data provenance
 

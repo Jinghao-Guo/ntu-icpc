@@ -112,6 +112,26 @@ scoreboard spelling wins, since Codeforces renders the real account name:
 
 A 4th roster column was cut off in the source image and is excluded from v1.
 
+## Theme and handle colours (added after v1)
+
+The site uses a white background. Palette values were checked against WCAG AA:
+body text 17.9:1, muted text 5.7:1, links 5.2:1, verdict colours ≥4.8:1.
+
+Handles are coloured by Codeforces rating using Codeforces' own hex values.
+These are *deliberately* not adjusted for contrast — orange (2.3:1) and cyan
+(2.8:1) fail AA on white, but competitive programmers read rank by colour
+instantly and Codeforces itself renders them this way on a white page.
+Recognition beats compliance here; handles are bolded to compensate, and rank
+plus rating are available on hover for anyone the colour does not serve.
+
+Ratings are baked into the data by `tools/refresh-ratings.py` rather than
+fetched client-side, so pages render instantly and visitors do not each hit the
+Codeforces API. They go stale until the script is re-run.
+
+The refresh script pairs API responses **positionally**. Codeforces resolves
+renamed accounts, so requesting an old handle returns the new one; name-matching
+silently dropped a renamed contestant during implementation.
+
 ## Deliberately excluded from v1
 
 Country flags (the scoreboard shows them, but inferring nationality from a small

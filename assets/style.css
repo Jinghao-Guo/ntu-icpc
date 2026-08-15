@@ -1,17 +1,17 @@
 :root {
-  --bg:        #0b0f19;
-  --surface:   #131a28;
-  --surface-2: #182131;
-  --border:    #253047;
-  --text:      #e6edf7;
-  --muted:     #8b97ad;
-  --accent:    #5b9dff;
-  --accent-dim:#2a3f66;
-  --ac:        #3fb950;
-  --wa:        #f85149;
-  --gold:      #f0b429;
-  --silver:    #b9c2d0;
-  --bronze:    #cd7f32;
+  --bg:        #ffffff;
+  --surface:   #f8fafc;  /* panels sit just off-white so they read as surfaces */
+  --surface-2: #f1f5f9;  /* table headers, hover */
+  --border:    #e2e8f0;
+  --text:      #0f172a;
+  --muted:     #5b6779;
+  --accent:    #2563eb;
+  --accent-dim:#bfd3f5;
+  --ac:        #15803d;
+  --wa:        #c81e1e;
+  --gold:      #a16207;
+  --silver:    #64748b;
+  --bronze:    #a55a1e;
   --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
 }
 
@@ -22,7 +22,6 @@ body {
   background: var(--bg);
   color: var(--text);
   font: 15px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
 }
 
 a { color: var(--accent); text-decoration: none; }
@@ -34,7 +33,7 @@ a:hover { text-decoration: underline; }
 
 .site-header {
   border-bottom: 1px solid var(--border);
-  background: rgba(11, 15, 25, .85);
+  background: rgba(255, 255, 255, .85);
   backdrop-filter: blur(8px);
   position: sticky;
   top: 0;
@@ -162,6 +161,23 @@ tr[data-place="2"] .rank-col { color: var(--silver); font-weight: 700; }
 tr[data-place="3"] .rank-col { color: var(--bronze); font-weight: 700; }
 
 .handle { font-family: var(--mono); }
+
+/* ---------- Codeforces rating colours ----------
+   Authentic Codeforces values. Deliberately not "corrected" for contrast:
+   competitive programmers read rank by colour at a glance, so recognition
+   beats WCAG here. Handles are bolded to compensate, as Codeforces does. */
+
+.cf { font-weight: 600; }
+.cf-newbie     { color: #808080; }  /*      < 1200 */
+.cf-pupil      { color: #008000; }  /* 1200 - 1399 */
+.cf-specialist { color: #03a89e; }  /* 1400 - 1599 */
+.cf-expert     { color: #0000ff; }  /* 1600 - 1899 */
+.cf-cm         { color: #aa00aa; }  /* 1900 - 2099 */
+.cf-master     { color: #ff8c00; }  /* 2100 - 2399 */
+.cf-gm         { color: #ff0000; }  /* 2400 +      */
+.cf-unrated    { color: var(--text); }
+
+a.handle:hover { text-decoration: underline; }
 .name-cell { white-space: normal; min-width: 200px; }
 .muted { color: var(--muted); }
 
@@ -172,7 +188,7 @@ tr[data-place="3"] .rank-col { color: var(--bronze); font-weight: 700; }
 .verdict.wa { color: var(--wa); }
 .verdict .mark { display: block; font-weight: 700; }
 .verdict .at { display: block; color: var(--muted); font-size: 11px; }
-.verdict.none { color: #33415c; }
+.verdict.none { color: #cbd5e1; }
 
 /* ---------- misc ---------- */
 

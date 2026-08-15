@@ -1,134 +1,200 @@
 [
   {
     "name": "ALHASHIM AHMED SALEH T",
-    "handle": "vahmad"
+    "handle": "vahmad",
+    "rating": 1942,
+    "rank": "candidate master"
   },
   {
     "name": "BUI DANG NGUYEN",
-    "handle": "ItsJerr"
+    "handle": "ItsJerr",
+    "rating": 2066,
+    "rank": "candidate master"
   },
   {
     "name": "CHINBAT IRMUUN",
-    "handle": "Irmuun.Ch"
+    "handle": "irmuun",
+    "rating": 2237,
+    "rank": "master"
   },
   {
     "name": "DAO THIEN PHONG",
-    "handle": "J_ai_bt_dou"
+    "handle": "J_ai_bt_dou",
+    "rating": 1947,
+    "rank": "candidate master"
   },
   {
     "name": "DE VERA HANS GABRIEL DACON",
-    "handle": "ProtonDecay314"
+    "handle": "ProtonDecay314",
+    "rating": 1800,
+    "rank": "expert"
   },
   {
     "name": "Duong Kien Khai",
-    "handle": "YangJackie"
+    "handle": "YangJackie",
+    "rating": 1744,
+    "rank": "expert"
   },
   {
     "name": "ERDENEBAYAR TENUUN",
-    "handle": "Tenkhu"
+    "handle": "Tenkhu",
+    "rating": 1590,
+    "rank": "specialist"
   },
   {
     "name": "KHURTSBILGUUN ONOLT",
-    "handle": "Onolt_kh"
+    "handle": "Onolt_kh",
+    "rating": 2396,
+    "rank": "international master"
   },
   {
     "name": "KONGKIJPIPAT PEERANAT",
-    "handle": "autoastt"
+    "handle": "autoastt",
+    "rating": 1813,
+    "rank": "expert"
   },
   {
     "name": "LI YITONG",
-    "handle": "LightParticle"
+    "handle": "LightParticle",
+    "rating": 1838,
+    "rank": "expert"
   },
   {
     "name": "Lim Jia Qing",
-    "handle": "nyavim"
+    "handle": "nyavim",
+    "rating": 1901,
+    "rank": "candidate master"
   },
   {
     "name": "MEMARNISHVILI DAVID",
-    "handle": "David-M"
+    "handle": "David-M",
+    "rating": 2190,
+    "rank": "master"
   },
   {
     "name": "NAMSRAIJAV BATSUKH",
-    "handle": "ChomuSuke"
+    "handle": "ChomuSuke",
+    "rating": 1685,
+    "rank": "expert"
   },
   {
     "name": "NGO HUY DANG KHOA",
-    "handle": "longjourney"
+    "handle": "longjourney",
+    "rating": 1632,
+    "rank": "expert"
   },
   {
     "name": "NGUYEN TRUNG DUNG",
-    "handle": "iCanSeeForever"
+    "handle": "iCanSeeForever",
+    "rating": 1980,
+    "rank": "candidate master"
   },
   {
     "name": "ODONBAATAR TENGIS",
-    "handle": "theulo"
+    "handle": "theulo",
+    "rating": 1516,
+    "rank": "specialist"
   },
   {
     "name": "RAHMAN JARIF",
-    "handle": "Jarif_Rahman"
+    "handle": "Jarif_Rahman",
+    "rating": 1804,
+    "rank": "expert"
   },
   {
     "name": "Sethupathy Sakthivel",
-    "handle": "sirsaksalot"
+    "handle": "sirsaksalot",
+    "rating": 1452,
+    "rank": "specialist"
   },
   {
     "name": "Tran Son Viet",
-    "handle": "VietCT"
+    "handle": "VietCT",
+    "rating": 2128,
+    "rank": "master"
   },
   {
     "name": "Wang Guanyu",
-    "handle": "cirnovlove"
+    "handle": "cirnovlove",
+    "rating": 2357,
+    "rank": "international master"
   },
   {
     "name": "Yeo Swe Hon",
-    "handle": "swehoneycodes"
+    "handle": "swehoneycodes",
+    "rating": 2028,
+    "rank": "candidate master"
   },
   {
     "name": "Yong Zi Hong",
-    "handle": "zipongster"
+    "handle": "zipongster",
+    "rating": 1678,
+    "rank": "expert"
   },
   {
     "name": "Zhu Zihan",
-    "handle": "Jelefy"
+    "handle": "Jelefy",
+    "rating": 2500,
+    "rank": "grandmaster"
   },
   {
     "name": "AIDARBEKOV ALIHAN MIRLANOVICH",
-    "handle": "Alihan_8"
+    "handle": "Alihan_8",
+    "rating": 2234,
+    "rank": "master"
   },
   {
     "name": "ASKAR AKEZHAN",
-    "handle": "WansurMyKing667"
+    "handle": "WansurMyKing667",
+    "rating": 2308,
+    "rank": "international master"
   },
   {
     "name": "CHENG LUFENG",
-    "handle": "Evier."
+    "handle": "Evier.",
+    "rating": 2145,
+    "rank": "master"
   },
   {
     "name": "HENG HAU YE",
-    "handle": "wurzang"
+    "handle": "wurzang",
+    "rating": 1906,
+    "rank": "candidate master"
   },
   {
     "name": "NGUYEN BUI DUC DUNG",
-    "handle": "RingedGenesis"
+    "handle": "RingedGenesis",
+    "rating": 2435,
+    "rank": "grandmaster"
   },
   {
     "name": "RAHMANI NODEHI RADIN",
-    "handle": "RadRah"
+    "handle": "RadRah",
+    "rating": 1909,
+    "rank": "candidate master"
   },
   {
     "name": "TRAN MINH HOANG",
-    "handle": "tranhoang95"
+    "handle": "tranhoang95",
+    "rating": null,
+    "rank": null
   },
   {
     "name": "TSOY MAXIM",
-    "handle": "ahyeon"
+    "handle": "ahyeon",
+    "rating": 2391,
+    "rank": "international master"
   },
   {
     "name": "ZARE MANI",
-    "handle": "eren__"
+    "handle": "eren__",
+    "rating": 2517,
+    "rank": "grandmaster"
   },
   {
     "name": "ZHAO FUCHENG",
-    "handle": "igotpror"
+    "handle": "igotpror",
+    "rating": null,
+    "rank": null
   }
 ]
