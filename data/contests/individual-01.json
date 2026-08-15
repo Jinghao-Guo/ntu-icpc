@@ -1,0 +1,29 @@
+{
+  "id": "individual-01",
+  "problems": ["A", "B", "C", "D", "E", "F"],
+  "_format": "Each cell mirrors what Codeforces prints: '+ 00:13' solved first try, '+2 01:19' solved after 2 rejections, '-3' three rejections and unsolved, '' never attempted.",
+  "standings": [
+    { "rank": 1,  "handle": "eren__",         "solved": 5, "penalty": 360, "cells": ["+ 00:13", "+ 02:16", "",        "+1 01:29", "+1 00:49", "+ 00:33"] },
+    { "rank": 2,  "handle": "David-M",        "solved": 5, "penalty": 423, "cells": ["",        "+ 01:08", "+ 02:13", "+ 01:26",  "+ 01:46",  "+ 00:30"] },
+    { "rank": 3,  "handle": "ItsJerr",        "solved": 5, "penalty": 463, "cells": ["+ 02:00", "+ 02:27", "+2 01:19", "",        "+ 00:17",  "+1 00:40"] },
+    { "rank": 4,  "handle": "Jarif_Rahman",   "solved": 4, "penalty": 236, "cells": ["+ 00:56", "+ 02:07", "",        "",         "+ 00:37",  "+ 00:16"] },
+    { "rank": 5,  "handle": "Evier.",         "solved": 4, "penalty": 258, "cells": ["+ 00:25", "+ 01:45", "",        "-3",       "+1 00:42", "+ 01:06"] },
+    { "rank": 6,  "handle": "VietCT",         "solved": 4, "penalty": 260, "cells": ["+ 00:47", "+ 01:34", "",        "",         "+ 00:29",  "+1 01:10"] },
+    { "rank": 7,  "handle": "LightParticle",  "solved": 4, "penalty": 282, "cells": ["+ 00:27", "+1 00:51", "",       "",         "+ 01:23",  "+ 01:41"] },
+    { "rank": 8,  "handle": "wurzang",        "solved": 4, "penalty": 292, "cells": ["+3 01:53", "+ 01:10", "",       "",         "+ 00:17",  "+ 00:32"] },
+    { "rank": 9,  "handle": "Onolt_kh",       "solved": 3, "penalty": 241, "cells": ["+ 00:44", "",        "",        "",         "+2 00:20", "+2 01:37"] },
+    { "rank": 10, "handle": "Jelefy",         "solved": 3, "penalty": 255, "cells": ["+ 00:39", "+1 01:55", "",       "",         "+ 01:21",  "-7"] },
+    { "rank": 11, "handle": "swehoneycodes",  "solved": 3, "penalty": 264, "cells": ["+ 02:05", "",        "",        "",         "+1 00:34", "+1 01:05"] },
+    { "rank": 12, "handle": "YangJackie",     "solved": 3, "penalty": 295, "cells": ["+ 01:04", "",        "",        "",         "+ 01:26",  "+1 02:05"] },
+    { "rank": 13, "handle": "nyavim",         "solved": 3, "penalty": 301, "cells": ["+ 02:19", "",        "",        "",         "+1 00:41", "+1 01:21"] },
+    { "rank": 14, "handle": "ProtonDecay314", "solved": 3, "penalty": 317, "cells": ["+1 02:15", "",       "",        "",         "+ 01:30",  "+1 00:52"] },
+    { "rank": 15, "handle": "sirsaksalot",    "solved": 3, "penalty": 325, "cells": ["+ 00:36", "",        "",        "",         "+1 01:54", "+1 02:15"] },
+    { "rank": 16, "handle": "zipongster",     "solved": 3, "penalty": 328, "cells": ["",        "",        "+ 01:12", "",         "+ 02:10",  "+1 01:46"] },
+    { "rank": 17, "handle": "Tenkhu",         "solved": 3, "penalty": 381, "cells": ["+2 01:49", "",       "+1 00:33", "",        "+2 02:19", ""] },
+    { "rank": 18, "handle": "autoastt",       "solved": 3, "penalty": 390, "cells": ["+ 01:55", "",        "",        "",         "+1 02:14", "+3 01:01"] },
+    { "rank": 19, "handle": "longjourney",    "solved": 2, "penalty": 135, "cells": ["+1 00:34", "",       "",        "",         "-1",       "+ 01:21"] },
+    { "rank": 20, "handle": "theulo",         "solved": 2, "penalty": 337, "cells": ["",        "",        "+3 02:25", "+1 01:52", "",        ""] },
+    { "rank": 21, "handle": "iCanSeeForever", "solved": 1, "penalty": 54,  "cells": ["+ 00:54", "",        "",        "",         "",         ""] },
+    { "rank": 22, "handle": "vahmad",         "solved": 1, "penalty": 68,  "cells": ["",        "",        "",        "",         "+ 01:08",  "-2"] }
+  ]
+}

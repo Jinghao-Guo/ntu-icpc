@@ -1,0 +1,13 @@
+# Local-only: contains student email addresses. Never commit — a public
+# GitHub Pages repo serves data/ as static files, so anything here is
+# fetchable at https://<user>.github.io/<repo>/data/...
+data/contestants.private.json
+
+# Source screenshots — the roster images show the email column.
+*.png
+*.jpg
+*.jpeg
+
+# Local preview / tooling noise
+node_modules/
+.DS_Store

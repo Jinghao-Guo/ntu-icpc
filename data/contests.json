@@ -1,0 +1,14 @@
+{
+  "penaltyPerRejection": 20,
+  "contests": [
+    {
+      "id": "individual-01",
+      "no": 1,
+      "title": "Individual Contest 1",
+      "date": "",
+      "url": "https://codeforces.com/group/aGASzy6kjB/contest/709706",
+      "problems": ["A", "B", "C", "D", "E", "F"],
+      "note": ""
+    }
+  ]
+}

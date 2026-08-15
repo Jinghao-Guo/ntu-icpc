@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Individual Contests · NTU ICPC</title>
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/app.js" defer></script>
+</head>
+<body data-page="individual">
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">NTU&nbsp;ICPC</a>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="contestants.html">Contestants</a>
+      <a href="individual.html" class="active">Individual Contests</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main-content">
+  <div class="wrap">
+
+    <h1>Individual Contests</h1>
+    <p class="lede">
+      Overall standings across every individual round, ranked by average placement.
+      Only contests a person actually entered count toward their average.
+    </p>
+
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th class="rank-col">#</th>
+            <th>Name</th>
+            <th>Handle</th>
+            <th class="num-col">Avg place</th>
+            <th class="num-col">Played</th>
+            <th class="num-col">Best</th>
+          </tr>
+        </thead>
+        <tbody id="overall"></tbody>
+      </table>
+    </div>
+
+    <h2>Contests</h2>
+    <div class="cards" id="contest-list"></div>
+
+    <section id="pending"></section>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">NTU ICPC training group · standings archive</div>
+</footer>
+
+</body>
+</html>

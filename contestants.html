@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contestants · NTU ICPC</title>
+<link rel="stylesheet" href="assets/style.css">
+<script src="assets/app.js" defer></script>
+</head>
+<body data-page="contestants">
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">NTU&nbsp;ICPC</a>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="contestants.html" class="active">Contestants</a>
+      <a href="individual.html">Individual Contests</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main-content">
+  <div class="wrap">
+
+    <h1>Contestants</h1>
+    <p class="lede">
+      <span id="roster-count">—</span> members of the training group. Handles link to
+      their Codeforces profile.
+    </p>
+
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th class="rank-col">#</th>
+            <th>Name</th>
+            <th>Handle</th>
+            <th class="num-col">Contests</th>
+            <th class="num-col">Best</th>
+          </tr>
+        </thead>
+        <tbody id="roster"></tbody>
+      </table>
+    </div>
+
+    <p class="note">
+      "Contests" counts rounds this person appeared in the scoreboard for;
+      "Best" is their highest finish.
+    </p>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">NTU ICPC training group · standings archive</div>
+</footer>
+
+</body>
+</html>
